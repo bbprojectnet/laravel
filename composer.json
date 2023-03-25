@@ -1,66 +1,127 @@
 {
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
-    "license": "MIT",
-    "require": {
-        "php": "^8.1",
-        "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^10.0",
-        "laravel/sanctum": "^3.2",
-        "laravel/tinker": "^2.8"
-    },
-    "require-dev": {
-        "fakerphp/faker": "^1.9.1",
-        "laravel/pint": "^1.0",
-        "laravel/sail": "^1.18",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^10.0",
-        "spatie/laravel-ignition": "^2.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "app/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
-        ]
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "php-http/discovery": true
-        }
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true
+	"name": "laravel/laravel",
+	"type": "project",
+	"description": "The Laravel Framework.",
+	"keywords": ["framework", "laravel"],
+	"license": "MIT",
+	"require": {
+		"php": "^8.1",
+		"guzzlehttp/guzzle": "^7.2",
+		"laravel/framework": "^10.0",
+		"laravel/sanctum": "^3.2",
+		"laravel/tinker": "^2.8"
+	},
+	"require-dev": {
+		"barryvdh/laravel-debugbar": "^3.8",
+		"barryvdh/laravel-ide-helper": "^2.13",
+		"brianium/paratest": "^7.1",
+		"fakerphp/faker": "^1.9.1",
+		"friendsofphp/php-cs-fixer": "^3.15",
+		"laravel/pint": "^1.0",
+		"laravel/sail": "^1.18",
+		"mockery/mockery": "^1.4.4",
+		"nunomaduro/collision": "^7.0",
+		"nunomaduro/larastan": "^2.5",
+		"phpunit/phpunit": "^10.0",
+		"spatie/laravel-ignition": "^2.0",
+		"veewee/composer-run-parallel": "^1.2"
+	},
+	"autoload": {
+		"psr-4": {
+			"App\\": "app/",
+			"Database\\Factories\\": "database/factories/",
+			"Database\\Seeders\\": "database/seeders/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\": "tests/"
+		}
+	},
+	"scripts": {
+		"post-autoload-dump": [
+			"Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+			"@php artisan package:discover --ansi"
+		],
+		"post-install-cmd": [
+			"@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+			"@php -r \"file_exists('supervisor.conf') || copy('supervisor.conf.example', 'supervisor.conf');\"",
+			"@php artisan key:generate --ansi",
+			"@php artisan storage:link --ansi"
+		],
+		"post-update-cmd": [
+			"@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+		],
+		"ide-generate": [
+			"@php -r \"file_exists('./database/support.sqlite') || file_put_contents('./database/support.sqlite', '') === 0;\"",
+			"@php artisan migrate:fresh --ansi --env=support --seed",
+			"@php artisan ide-helper:generate --ansi --env=support",
+			"@php artisan ide-helper:models --ansi --env=support --write --smart-reset"
+		],
+		"cs-fix": [
+			"php-cs-fixer fix --ansi"
+		],
+		"analyse": [
+			"phpstan analyse --ansi --memory-limit=2G"
+		],
+		"test": [
+			"@php artisan test --ansi --compact --no-coverage --stop-on-failure"
+		],
+		"full-test": [
+			"@php artisan test --ansi --parallel --no-coverage"
+		],
+		"coverage-test": [
+			"@php artisan test --ansi --parallel",
+			"start storage/framework/testing/report/index.html"
+		],
+		"pre-commit": [
+			"@ide-generate",
+			"@cs-fix",
+			"@analyse",
+			"@full-test"
+		],
+		"clear": [
+			"@php artisan config:clear --ansi",
+			"@php artisan cache:clear --ansi",
+			"@php artisan route:clear --ansi",
+			"@php artisan view:clear --ansi"
+		],
+		"optimize": [
+			"@php artisan optimize --ansi"
+		],
+		"seed": [
+			"@php artisan cache:clear --ansi",
+			"@php artisan migrate:fresh --ansi --seed"
+		],
+		"server": [
+			"@php artisan serve --ansi"
+		],
+		"schedule": [
+			"@php artisan schedule:work --ansi"
+		],
+		"queue": [
+			"@php artisan queue:work --ansi --sleep=1"
+		],
+		"start": [
+			"@parallel server schedule queue"
+		]
+	},
+	"extra": {
+		"laravel": {
+			"dont-discover": []
+		}
+	},
+	"config": {
+		"optimize-autoloader": true,
+		"preferred-install": "dist",
+		"process-timeout": 0,
+		"sort-packages": true,
+		"allow-plugins": {
+			"pestphp/pest-plugin": true,
+			"php-http/discovery": true,
+			"veewee/composer-run-parallel": true
+		}
+	},
+	"minimum-stability": "stable",
+	"prefer-stable": true
 }

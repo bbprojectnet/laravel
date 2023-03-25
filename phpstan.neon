@@ -1,0 +1,19 @@
+includes:
+	- ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+	level: 9
+	# checkMissingIterableValueType: false
+
+	paths:
+		- app/
+
+	excludePaths:
+		# - ./*/*/FileToBeExcluded.php
+
+	earlyTerminatingFunctionCalls:
+		- abort
+
+	ignoreErrors:
+		# - '#Method .+ should return static.+ but returns .+\.#'
+		# - '#PHPDoc tag @var#'

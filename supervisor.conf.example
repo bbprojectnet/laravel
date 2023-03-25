@@ -1,0 +1,20 @@
+[group:laravel]
+programs=laravel-schedule,laravel-queue
+
+[program:laravel-schedule]
+command=php /var/www/html/laravel/artisan schedule:work
+directory=/var/www/html/laravel
+autorestart=true
+user=www-data
+stderr_logfile=/var/www/html/laravel/storage/logs/schedule.log
+stopwaitsecs=60
+
+[program:laravel-queue]
+process_name=%(program_name)s-%(process_num)02d
+command=php /var/www/html/laravel/artisan queue:work
+directory=/var/www/html/laravel
+autorestart=true
+user=www-data
+numprocs=2
+stderr_logfile=/var/www/html/laravel/storage/logs/queue.log
+stopwaitsecs=60
