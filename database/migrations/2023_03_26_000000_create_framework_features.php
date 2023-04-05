@@ -28,16 +28,16 @@ return new class () extends Migration {
 			$table->timestamp('created_at')->nullable();
 		});
 
-		Schema::create('personal_access_tokens', function (Blueprint $table) {
-			$table->id();
-			$table->morphs('tokenable');
-			$table->string('name');
-			$table->string('token', 64)->unique();
-			$table->text('abilities')->nullable();
-			$table->timestamp('last_used_at')->nullable();
-			$table->timestamp('expires_at')->nullable();
-			$table->timestamps();
-		});
+		// Schema::create('personal_access_tokens', function (Blueprint $table) {
+		// 	$table->id();
+		// 	$table->morphs('tokenable');
+		// 	$table->string('name');
+		// 	$table->string('token', 64)->unique();
+		// 	$table->text('abilities')->nullable();
+		// 	$table->timestamp('last_used_at')->nullable();
+		// 	$table->timestamp('expires_at')->nullable();
+		// 	$table->timestamps();
+		// });
 
 		Schema::create('jobs', function (Blueprint $table) {
 			$table->id();
@@ -77,7 +77,7 @@ return new class () extends Migration {
 		Schema::dropIfExists('sessions');
 		Schema::dropIfExists('failed_jobs');
 		Schema::dropIfExists('jobs');
-		Schema::dropIfExists('personal_access_tokens');
+		// Schema::dropIfExists('personal_access_tokens');
 		Schema::dropIfExists('password_reset_tokens');
 		Schema::dropIfExists('cache_locks');
 		Schema::dropIfExists('cache');
