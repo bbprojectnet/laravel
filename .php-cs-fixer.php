@@ -16,7 +16,7 @@ $finder = (new Finder())
 return (new Config())
 	->setRules([
 		'@PSR12' => true,
-		'align_multiline_comment' => ['comment_type' => 'all_multiline'],
+		'align_multiline_comment' => true,
 		'array_indentation' => true,
 		'array_syntax' => ['syntax' => 'short'],
 		'blank_line_before_statement' => true,
