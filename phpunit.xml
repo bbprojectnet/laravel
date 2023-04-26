@@ -13,10 +13,12 @@
 			<directory suffix="Test.php">./tests/Feature</directory>
 		</testsuite>
 	</testsuites>
-	<coverage>
+	<source>
 		<include>
 			<directory suffix=".php">./app</directory>
 		</include>
+	</source>
+	<coverage>
 		<report>
 			<text outputFile="php://stdout" showOnlySummary="true"/>
 			<html outputDirectory="./storage/framework/testing/report" lowUpperBound="60" highLowerBound="90"/>
