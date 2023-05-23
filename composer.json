@@ -43,18 +43,19 @@
 			"Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
 			"@php artisan package:discover --ansi"
 		],
+		"post-create-project-cmd": [
+			"@php artisan key:generate --ansi"
+		],
 		"post-install-cmd": [
 			"@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-			"@php -r \"file_exists('supervisor.conf') || copy('supervisor.conf.example', 'supervisor.conf');\"",
-			"@php artisan key:generate --ansi",
-			"@php artisan storage:link --ansi"
+			"@php -r \"file_exists('supervisor.conf') || copy('supervisor.conf.example', 'supervisor.conf');\""
 		],
 		"post-update-cmd": [
 			"@php artisan vendor:publish --tag=laravel-assets --ansi --force"
 		],
 		"ide-generate": [
 			"@php -r \"file_exists('./database/support.sqlite') || file_put_contents('./database/support.sqlite', '') === 0;\"",
-			"@php artisan migrate:fresh --ansi --env=support --seed",
+			"@php artisan migrate:fresh --ansi --env=support",
 			"@php artisan ide-helper:generate --ansi --env=support",
 			"@php artisan ide-helper:models --ansi --env=support --write --smart-reset"
 		],
@@ -85,6 +86,10 @@
 			"@php artisan cache:clear --ansi",
 			"@php artisan route:clear --ansi",
 			"@php artisan view:clear --ansi"
+		],
+		"setup": [
+			"@php artisan key:generate --ansi",
+			"@php artisan storage:link --ansi"
 		],
 		"optimize": [
 			"@php artisan optimize --ansi"

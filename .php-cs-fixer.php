@@ -52,7 +52,6 @@ return (new Config())
 		'phpdoc_summary' => true,
 		'phpdoc_trim_consecutive_blank_line_separation' => true,
 		'phpdoc_trim' => true,
-		'simplified_null_return' => true,
 		'single_blank_line_at_eof' => true,
 		'single_blank_line_before_namespace' => true,
 		'single_quote' => true,
