@@ -66,7 +66,7 @@
 			"phpstan analyse --ansi --memory-limit=2G"
 		],
 		"test": [
-			"@php artisan test --ansi --compact --no-coverage --stop-on-failure"
+			"@php artisan test --ansi --compact --no-coverage --stop-on-failure --stop-on-error"
 		],
 		"full-test": [
 			"@php artisan test --ansi --parallel --no-coverage"
