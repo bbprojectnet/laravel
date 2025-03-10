@@ -68,10 +68,13 @@
 		"test": [
 			"@php artisan test --ansi --compact --no-coverage --stop-on-failure --stop-on-error"
 		],
-		"full-test": [
+		"test:profile": [
+			"@php artisan test --ansi --compact --profile --no-coverage"
+		],
+		"test:all": [
 			"@php artisan test --ansi --parallel --no-coverage"
 		],
-		"coverage-test": [
+		"test:coverage": [
 			"@php artisan test --ansi --parallel",
 			"start storage/framework/testing/report/index.html"
 		],
@@ -79,11 +82,12 @@
 			"@ide-generate",
 			"@cs-fix",
 			"@analyse",
-			"@full-test"
+			"@test:all"
 		],
 		"clear": [
+			"@php artisan cache:clear --ansi || exit 0",
 			"@php artisan config:clear --ansi",
-			"@php artisan cache:clear --ansi",
+			"@php artisan event:clear --ansi",
 			"@php artisan route:clear --ansi",
 			"@php artisan view:clear --ansi"
 		],
@@ -95,7 +99,7 @@
 			"@php artisan optimize --ansi"
 		],
 		"seed": [
-			"@php artisan cache:clear --ansi",
+			"@php artisan cache:clear --ansi || exit 0",
 			"@php artisan migrate:fresh --ansi --seed"
 		],
 		"server": [
@@ -105,7 +109,7 @@
 			"@php artisan schedule:work --ansi"
 		],
 		"queue": [
-			"@php artisan queue:work --ansi --sleep=1"
+			"@php artisan queue:work --ansi"
 		],
 		"start": [
 			"@parallel server schedule queue"
