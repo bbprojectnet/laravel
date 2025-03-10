@@ -1,4 +1,5 @@
 {
+	"$schema": "https://getcomposer.org/schema.json",
 	"name": "laravel/laravel",
 	"type": "project",
 	"description": "The skeleton application for the Laravel framework.",
@@ -6,7 +7,7 @@
 	"license": "MIT",
 	"require": {
 		"php": "^8.2",
-		"laravel/framework": "^11.0",
+		"laravel/framework": "^11.31",
 		"laravel/tinker": "^2.9"
 	},
 	"require-dev": {
@@ -19,10 +20,8 @@
 		"laravel/pint": "^1.13",
 		"laravel/sail": "^1.26",
 		"mockery/mockery": "^1.6",
-		"nunomaduro/collision": "^8.0",
-		"phpunit/phpunit": "^11.0",
-		"spatie/laravel-ignition": "^2.4",
-		"veewee/composer-run-parallel": "^1.3"
+		"nunomaduro/collision": "^8.1",
+		"phpunit/phpunit": "^11.0.1"
 	},
 	"autoload": {
 		"psr-4": {
@@ -109,10 +108,11 @@
 			"@php artisan schedule:work --ansi"
 		],
 		"queue": [
-			"@php artisan queue:work --ansi"
+			"@php artisan queue:listen --ansi"
 		],
-		"start": [
-			"@parallel server schedule queue"
+		"dev": [
+			"Composer\\Config::disableProcessTimeout",
+			"npx concurrently \"php artisan serve --ansi\" \"php artisan schedule:work --ansi\" \"php artisan queue:listen --ansi\" --names=server,schedule,queue"
 		]
 	},
 	"extra": {
@@ -127,8 +127,7 @@
 		"sort-packages": true,
 		"allow-plugins": {
 			"pestphp/pest-plugin": true,
-			"php-http/discovery": true,
-			"veewee/composer-run-parallel": true
+			"php-http/discovery": true
 		}
 	},
 	"minimum-stability": "stable",
