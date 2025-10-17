@@ -11,6 +11,7 @@
 /storage/pail
 /vendor
 
+.DS_Store
 .env
 .env.backup
 .env.production
@@ -22,3 +23,4 @@ auth.json
 Homestead.json
 Homestead.yaml
 supervisor.conf
+Thumbs.db

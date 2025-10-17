@@ -16,7 +16,7 @@
 		"fakerphp/faker": "^1.23",
 		"friendsofphp/php-cs-fixer": "^3.52",
 		"larastan/larastan": "^3.1",
-		"laravel/pint": "^1.13",
+		"laravel/pint": "^1.24",
 		"laravel/sail": "^1.41",
 		"mockery/mockery": "^1.6",
 		"nunomaduro/collision": "^8.6",
@@ -111,7 +111,7 @@
 		],
 		"dev": [
 			"Composer\\Config::disableProcessTimeout",
-			"npx concurrently \"php artisan serve --ansi\" \"php artisan schedule:work --ansi\" \"php artisan queue:listen --ansi\" --names=server,schedule,queue"
+			"npx concurrently \"php artisan serve --ansi\" \"php artisan schedule:work --ansi\" \"php artisan queue:listen --ansi\" --names=server,schedule,queue --kill-others"
 		]
 	},
 	"extra": {
